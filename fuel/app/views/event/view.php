@@ -2,6 +2,7 @@
 
 <p>
     <strong><?php echo __("ACTION_VIEW_LABEL_TITLE")?>:</strong>
+    <strong><?php echo __("ACTION_VIEW_LABEL_TITLE")?>:</strong>
     <?php echo $event->title; ?></p>
 <p>
     <strong><?php echo __("ACTION_VIEW_LABEL_START")?>:</strong>
@@ -10,7 +11,7 @@
 <p>
     <strong><?php echo __("ACTION_VIEW_LABEL_DESCRIPTION")?>:</strong>
     <?php
-    //Stupid hack. Since FuelPHP encodes everything, 
+    //Stupid hack. Since FuelPHP encodes everything,
     //even HTML content coming from Aloha editor.
     //hence we have to decode "htmlspecialchars" to avoid
     //double encoding
@@ -23,8 +24,8 @@
 	<?php foreach ($event->agendas as $agenda) : ?>
         <li><?php
 	    echo $agenda->title;
-	    echo " " . Html::anchor("agenda/delete/" . $agenda->id, 
-				    "<i class='icon-remove'></i>", 
+	    echo " " . Html::anchor("agenda/delete/" . $agenda->id,
+				    "<i class='icon-remove'></i>",
 				    array("onclick" => "return confirm('Do you want to delete this agenda item?');"));
 	    ?></li>
 	<?php
@@ -36,12 +37,27 @@
     </li>
 </ul>
 
+
+<?php echo "here must be comments" ?>
+
+
+<!-- <h1><?php echo __("ACTION_VIEW_LABEL_COMMENTS")?></h1> -->
+<ul id="comments">
+    <?php foreach ($event->comments as $comment) : ?>
+        <li><?php
+        echo $comment->comment;
+        ?></li>
+    <?php
+    endforeach;  //foreach agenda item
+    ?>
+</ul>
+
 <?php
 if ($event->poster!=null) : ?>
     <p><?php echo Html::anchor("event/poster/".$event->id, "<i class='icon-file'></i>See the poster!")?></p>
 <?php endif; //if we have a poster ?>
 
-<p>    
+<p>
     <?php echo Html::anchor('event/edit/' . $event->id, '<i class="icon-edit"></i> '.__('ACTION_VIEW_EDIT_EVENT'), array("class" => "btn")); ?>
     <?php echo Html::anchor('event/delete/' . $event->id, '<i class="icon-remove"></i> '.__('ACTION_VIEW_DELETE_EVENT'), array("class" => "btn", "onclick"=>"return confirm('Really?');")); ?>
 </p>

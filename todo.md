@@ -64,12 +64,12 @@ Create the hosts file entry 127.0.0.1  = http://www.eventual.org (If you have pr
 
 DONE        In c:\wamp\vhosts, create two files: eventual.conf  with the following contents: ....
 
-DOEN        Download the Eventual project from github: https://github.com/naivists/TTII_2012 (don't have GIT client: use the ZIP version: https://github.com/naivists/TTII_2012/archive/master.zip ). Extract it to c:\wamp\apps\eventual directory.
+DONE        Download the Eventual project from github: https://github.com/naivists/TTII_2012 (don't have GIT client: use the ZIP version: https://github.com/naivists/TTII_2012/archive/master.zip ). Extract it to c:\wamp\apps\eventual directory.
 
-Make sure the environment variable PATH contains WampServer's PHP path (how to do it: see http://www.computerhope.com/issues/ch000549.htm; the path to add is c:\wamp\bin\php\php5.4.16)
-Run cmd.exe
-cd c:\wamp\apps\eventual
-php oil refine migrate
+DONE            Make sure the environment variable PATH contains WampServer's PHP path (how to do it: see http://www.computerhope.com/issues/ch000549.htm; the path to add is c:\wamp\bin\php\php5.4.16)
+
+DONE            Run cmd.exe; cd c:\wamp\apps\eventual; php oil refine migrate;
+
 Launch NetBeans, click File->Open project, select the folder c:\wamp\apps\eventual
 What to submit
 

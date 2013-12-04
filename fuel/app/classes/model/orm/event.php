@@ -1,22 +1,27 @@
 <?php
 
 class Model_Orm_Event extends Orm\Model {
-    
+
     protected static $_table_name = 'events';
     protected static $_primary_key = array('id');
-    
-    
+
+
     protected static $_has_many = array(
 	'agendas' => array(
 	    'key_from' => 'id',
 	    'model_to' => 'Model_Orm_Agenda',
 	    'key_to' => 'event_id',
 	    'cascade_save' => true,
-	    'cascade_delete' => false)
+	    'cascade_delete' => false),
+    'comments' => array(
+        'key_from' => 'id',
+        'model_to' => 'Model_Orm_Comment',
+        'key_to' => 'event_id',
+        'cascade_save' => true,
+        'cascade_delete' => false)
+    )
     );
-    
-    
-    
+
 
     protected static $_properties = array(
 	'id',
@@ -31,7 +36,7 @@ class Model_Orm_Event extends Orm\Model {
 	    'data_type' => 'date',
 	    'label' => 'Start date and time of the event'
 	),
-	'location_id' => array( 
+	'location_id' => array(
 		"form"=>array("type"=>true)
 	),
 	'poster' => array(

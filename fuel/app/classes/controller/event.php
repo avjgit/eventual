@@ -10,23 +10,23 @@ use \Model_Orm_Event;
 class Controller_Event extends Controller_Public {
     private $_auth;
     private $_user_id;
-    
+
     public function before() {
 	parent::before();
-	
+
 	$this->_auth = Auth::instance();
 	$userids = $this->_auth->get_user_id();
 	$this->_user_id = $userids[1];
-	
+
 	//loads messages for event controller
 	Lang::load("event");
-	
+
     }
     /**
      * Demonstrates reading data through an ORM model
      */
     public function action_index() {
-	
+
 	$event_model = Model_Orm_Event::find("all", array(
 		    //we only want future and current events
 		    "where" => array(
@@ -44,10 +44,10 @@ class Controller_Event extends Controller_Public {
 	$this->template->page_title = __("ACTION_INDEX_TITLE");
 	$this->template->page_content = $main_content;
     }
-    
+
     /**
      * Creation of new events.
-     * Works on both the first load, which is typically 
+     * Works on both the first load, which is typically
      * a GET request as on later requests, which are POST.
      * When POST-ing, a validation is run on input data.
      * Validation rules taken from "Event" model.
@@ -77,7 +77,7 @@ class Controller_Event extends Controller_Public {
 		Session::set_flash("success", __('ACTION_CREATE_CREATED') . $val->validated("title"));
 		Response::redirect("event/view/" . $newEvent->id);
 	    } else {
-		//validation did not work. 
+		//validation did not work.
 		//But still, there may be uploaded files!
 		$errors = $this->try_get_attachments();
 		Session::set_flash("error", array_merge($val->error(), $errors));
@@ -92,7 +92,7 @@ class Controller_Event extends Controller_Public {
 	    $data["form_key"] = md5(mt_rand(1000, 10000));
 	}
 	$data["locations"] = Model_Orm_Location::get_locations();
-	
+
 	$this->add_rich_form_scripts();
 	$this->template->page_content = View::forge("event/create", $data);
     }
@@ -150,7 +150,7 @@ class Controller_Event extends Controller_Public {
 		return array();
 	}
     }
-    
+
     /**
      * Forced download of the attached file
      * @param type $id
@@ -161,11 +161,11 @@ class Controller_Event extends Controller_Public {
 	//if the event request is not valid, return a 404 error
 	if (is_null($id))
 	    throw new HttpNotFoundException;
-	
+
 	$event = Model_Orm_Event::find($id);
 	if (is_null($event))
 	    throw new HttpNotFoundException;
-	
+
 	if ($event->poster != null) {
 	    //the files are found in subfolder of APPPATH, named "files"
 	    //DS stands for "Directory Separator"
@@ -225,11 +225,11 @@ class Controller_Event extends Controller_Public {
      * @param int $id Database ID of the item
      */
     public function action_view($id = null) {
-	
+
 	is_null($id) and Response::redirect('Event');
-	
+
 	$event = Model_Orm_Event::find($id, array("related" =>
-		    array("agendas", "location")));
+		    array("agendas", "location", "comments")));
 
 	is_null($event) and Response::redirect('Event');
 
