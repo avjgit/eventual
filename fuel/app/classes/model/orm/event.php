@@ -19,7 +19,6 @@ class Model_Orm_Event extends Orm\Model {
         'key_to' => 'event_id',
         'cascade_save' => true,
         'cascade_delete' => false)
-    )
     );
 
 

@@ -45,12 +45,17 @@
 <ul id="comments">
     <?php foreach ($event->comments as $comment) : ?>
         <li><?php
-        echo $comment->comment;
+        echo $comment->comment;?>
+        </br>
+        <?php
+        $user = Model_Orm_User::find($comment->user_id);
+        echo $user->username;
         ?></li>
     <?php
     endforeach;  //foreach agenda item
     ?>
 </ul>
+
 
 <?php
 if ($event->poster!=null) : ?>

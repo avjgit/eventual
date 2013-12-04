@@ -16,7 +16,12 @@ class Model_Orm_Comment extends Orm\Model
 			    'event' => array(
 				'key_from' => 'event_id',
 				'model_to' => 'Model_Orm_Event',
-				'key_to' => 'id'			    )
+				'key_to' => 'id'),
+
+                'user' => array(
+                'key_from' => 'user_id',
+                'model_to' => 'Model_Orm_User',
+                'key_to' => 'id')
 			);
     public static function validate($factory) {
 	$val = Validation::forge($factory);
